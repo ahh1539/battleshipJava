@@ -1,5 +1,7 @@
 package battleship;
 
+import java.io.Serializable;
+
 /**
  * The class to represent the grid of cells (squares).
  * A collection of ships is also kept so the Board
