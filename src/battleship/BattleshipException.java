@@ -2,7 +2,7 @@ package battleship;
 
 public class BattleshipException extends Exception {
 
-    public static final int UNSET = "-1";
+    public static final int UNSET = -1;
 
     // Create public integer fields row and column.
     // Make them so they cannot be changed, and non-static.
