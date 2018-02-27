@@ -52,6 +52,6 @@ public class Ship implements Serializable {
      * @throws OutOfBoundsException if this ship would extend beyond
      *              the board
      */
-    // Write your code here.
+    // TODO Write your code here.
 
 }
