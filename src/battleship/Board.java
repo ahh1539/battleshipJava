@@ -23,7 +23,7 @@ public class Board implements Serializable {
      * @return the Cell created for this position on the board
      * @throws OutOfBoundsException if either coordinate is negative or too high
      */
-    //getCell GOES HERE
+    // TODO getCell GOES HERE
 
 
     /**
@@ -35,6 +35,6 @@ public class Board implements Serializable {
      * @rit.pre This ship has already informed the Cells of the board
      *    that are involved.
      */
-    // addShip GOES HERE
+    // TODO addShip GOES HERE
 
 }
