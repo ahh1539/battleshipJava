@@ -1,5 +1,7 @@
 package battleship;
-
+/*
+Name: Alexander Hurley
+ */
 public class BattleshipException extends Exception {
 
     public static final int UNSET = -1;
