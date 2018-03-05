@@ -40,4 +40,24 @@ public class Cell implements Serializable {
      */
     // TODO putShip GOES HERE
 
+    public Cell(int row, int column){
+
+    }
+
+    public void putShip(Ship ship) throws OverlapException{
+
+    }
+
+    public void hit() throws CellPlayedException{
+
+    }
+
+    public char displayHitStatus(){
+
+    }
+
+    public char displayChar(){
+
+    }
+
 }

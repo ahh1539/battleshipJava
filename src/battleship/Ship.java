@@ -7,6 +7,12 @@ import java.io.Serializable;
  */
 public class Ship implements Serializable {
 
+    private int uRow;
+    private Board board;
+    private int lCol;
+    private int length;
+    private Ship.Orientation ort;
+
     public static final String SUNK_MESSAGE = "A battleship has been sunk!";
 
     /**
@@ -53,5 +59,24 @@ public class Ship implements Serializable {
      *              the board
      */
     // TODO Write your code here.
+
+    public Ship(Board board, int uRow, int lCol, Ship.Orientation ort, int length)throws OverlapException, OutOfBoundsException{
+        this.board = board;
+        this.uRow = uRow;
+        this.lCol = lCol;
+        this.length = length;
+        this.ort = ort;
+    }
+
+    public void hit(){
+        if(!(isSunk())){
+
+        }
+
+    }
+
+    public boolean isSunk(){
+
+    }
 
 }

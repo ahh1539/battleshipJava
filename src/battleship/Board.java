@@ -1,5 +1,6 @@
 package battleship;
 
+import java.io.PrintStream;
 import java.io.Serializable;
 
 /**
@@ -36,5 +37,48 @@ public class Board implements Serializable {
      *    that are involved.
      */
     // TODO addShip GOES HERE
+
+    private int height;
+    private int width;
+
+    public Board(int height, int width){
+        this.height = height;
+        this.width = width;
+    }
+
+    public int getHeight(){
+        return this.height;
+    }
+
+    public int getWidth(){
+        return this.width;
+    }
+
+    public Cell getCell(int row, int column) throws OutOfBoundsException{
+
+
+    }
+
+    public String toString(){
+
+    }
+
+    public void display(PrintStream out){
+
+    }
+
+    public void fullDisplay(PrintStream out){
+
+    }
+
+    public void addShip(Ship ship){
+
+    }
+
+    public boolean allSunk(){
+
+    }
+
+
 
 }
