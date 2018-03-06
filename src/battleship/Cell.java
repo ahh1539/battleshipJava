@@ -53,6 +53,9 @@ public class Cell implements Serializable {
      */
     // TODO putShip GOES HERE
 
+    /*
+    Puts ship into a cell
+     */
     public void putShip(Ship ship) throws OverlapException{
         if(this.ship == null){
             this.ship = ship;
@@ -62,6 +65,9 @@ public class Cell implements Serializable {
 
     }
 
+    /*
+    sets status of a ship cell as hit or not hit
+     */
     public void hit() throws CellPlayedException{
         if(hit = true){
             throw new CellPlayedException(this.row, this.column);
@@ -72,6 +78,9 @@ public class Cell implements Serializable {
 
     }
 
+    /*
+    Return a character representing the state of this Cell but without revealing unhit portions of ships
+     */
     public char displayHitStatus(){
         if(ship.isSunk()){
             return SUNK_SHIP_SECTION;
@@ -88,6 +97,9 @@ public class Cell implements Serializable {
 
     }
 
+     /*
+     Return a character representing the state of this Cell
+      */
     public char displayChar(){
         if(ship.isSunk()){
             return SUNK_SHIP_SECTION;
