@@ -9,6 +9,9 @@ import java.io.Serializable;
  */
 public class Cell implements Serializable {
 
+    private Ship ship;
+    private Boolean hit = false;
+
     /** Character to display for a ship that has been entirely sunk */
     public static final char SUNK_SHIP_SECTION = '*';
 
@@ -31,6 +34,16 @@ public class Cell implements Serializable {
     public static final char HIDDEN_SHIP_SECTION = 'S';
 
 
+    private int row;
+    private int column;
+
+
+    public Cell(int row, int column){
+        this.row = row;
+        this.column = column;
+
+    }
+
     /**
      * Place a ship on this cell. Of course, ships typically cover
      * more than one Cell, so the same ship will usually be passed
@@ -40,23 +53,57 @@ public class Cell implements Serializable {
      */
     // TODO putShip GOES HERE
 
-    public Cell(int row, int column){
-
-    }
-
     public void putShip(Ship ship) throws OverlapException{
+        if(this.ship == null){
+            this.ship = ship;
+        }
+        else
+            throw new OverlapException(this.row, this.column);
 
     }
 
     public void hit() throws CellPlayedException{
+        if(hit = true){
+            throw new CellPlayedException(this.row, this.column);
+        }
+        else {
+            hit = true;
+        }
 
     }
 
     public char displayHitStatus(){
+        if(ship.isSunk()){
+            return SUNK_SHIP_SECTION;
+        }
+        if(!(ship.isSunk())){
+            return HIT_SHIP_SECTION;
+        }
+        if(this.ship == null){
+            return HIT_WATER;
+        }
+        else {
+            return PRISTINE_WATER;
+        }
 
     }
 
     public char displayChar(){
+        if(ship.isSunk()){
+            return SUNK_SHIP_SECTION;
+        }
+        if(!(ship.isSunk())){
+            return HIT_SHIP_SECTION;
+        }
+        if(this.ship == null){
+            return HIT_WATER;
+        }
+        if(this.ship == null && hit == false){
+            return PRISTINE_WATER;
+        }
+        else{
+            return HIDDEN_SHIP_SECTION;
+        }
 
     }
 

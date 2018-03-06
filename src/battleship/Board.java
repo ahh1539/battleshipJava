@@ -2,6 +2,8 @@ package battleship;
 
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * The class to represent the grid of cells (squares).
@@ -40,10 +42,18 @@ public class Board implements Serializable {
 
     private int height;
     private int width;
+    private Cell[][] board;
 
     public Board(int height, int width){
         this.height = height;
         this.width = width;
+        board = new Cell[height][width];
+        for(int i = 0 ; i < height; i++){
+            for(int j = 0; j < width; j++){
+                board[i][j] = new Cell(i, j);
+            }
+        }
+
     }
 
     public int getHeight(){
@@ -55,19 +65,55 @@ public class Board implements Serializable {
     }
 
     public Cell getCell(int row, int column) throws OutOfBoundsException{
+        if(!(row > this.getHeight() || row < this.getHeight() || column > this.getWidth() || column < this.getWidth())){
+            return board[row][column];
+        }
+        else {
+            throw  new OutOfBoundsException(row,column);
+        }
 
 
     }
+
+    /*
 
     public String toString(){
 
     }
 
+    */
+
     public void display(PrintStream out){
+        StringBuilder t = new StringBuilder();
+        for(int i = 0; i <= width; i++){
+            t.append(" ");
+            t.append(t);
+        }
+        for (int row = 0; row < height; row++){
+            t.append(row);
+            t.append(" ");
+            for(int column = 0; column < width; column++){
+                t.append("\n");
+                t.append(board[row][column].displayHitStatus());
+            }
+        }
 
     }
 
     public void fullDisplay(PrintStream out){
+        StringBuilder t = new StringBuilder();
+        for(int i = 0; i <= width; i++){
+            t.append(" ");
+            t.append(t);
+        }
+        for (int row = 0; row < height; row++){
+            t.append(row);
+            t.append(" ");
+            for(int column = 0; column < width; column++){
+                t.append("\n");
+                t.append(board[row][column].displayChar());
+            }
+        }
 
     }
 

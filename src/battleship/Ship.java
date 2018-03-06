@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Ship implements Serializable {
 
+    private int count = 0;
     private int uRow;
     private Board board;
     private int lCol;
@@ -21,7 +22,7 @@ public class Ship implements Serializable {
      * are descriptive and match the words put in the configuration
      * files.
      *
-     * @see Orientation#valueOf(String)
+     * @see Orientation#"valueOf"(String)
      */
     public enum Orientation {
         HORIZONTAL( 0, 1 ), VERTICAL( 1, 0 );
@@ -66,16 +67,40 @@ public class Ship implements Serializable {
         this.lCol = lCol;
         this.length = length;
         this.ort = ort;
+        if(!(uRow > board.getHeight() || uRow < board.getHeight() || lCol > board.getWidth() || lCol < board.getWidth())){
+            if(ort == Orientation.HORIZONTAL){
+                int i = 0;
+                while(i <= length){
+                    board.getCell(uRow,lCol+i).putShip(this);
+                    i++;
+                }
+            }
+            if(ort == Orientation.VERTICAL){
+                int i = 0;
+                while(i <= length){
+                    board.getCell(uRow+i,lCol).putShip(this);
+                    i++;
+                }
+            }
+        }
     }
 
-    public void hit(){
-        if(!(isSunk())){
 
+    public void hit(){
+        count++;
+        if(count == this.length){
+            System.out.println(SUNK_MESSAGE);
         }
 
     }
 
     public boolean isSunk(){
+        if(count==this.length){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 
