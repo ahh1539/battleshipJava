@@ -7,6 +7,9 @@ import java.io.Serializable;
  */
 public class Ship implements Serializable {
 
+    /*
+    fields used in this class
+     */
     private int count = 0;
     private int uRow;
     private Board board;
@@ -61,6 +64,9 @@ public class Ship implements Serializable {
      */
     // TODO Write your code here.
 
+    /*
+    This is the constructor for the Ship class with creates a type ship
+     */
     public Ship(Board board, int uRow, int lCol, Ship.Orientation ort, int length)throws OverlapException, OutOfBoundsException{
         this.board = board;
         this.uRow = uRow;
@@ -85,7 +91,10 @@ public class Ship implements Serializable {
         }
     }
 
-
+    /*
+    Returns the number of times ship is hit, if
+    hit as many times as length retuns sunk message
+     */
     public void hit(){
         count++;
         if(count == this.length){
@@ -94,6 +103,9 @@ public class Ship implements Serializable {
 
     }
 
+    /*
+    returns the state of the ship if it is sunk or not
+     */
     public boolean isSunk(){
         if(count==this.length){
             return true;
