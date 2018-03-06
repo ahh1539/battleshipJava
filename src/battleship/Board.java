@@ -43,6 +43,9 @@ public class Board implements Serializable {
     private int width;
     private Cell[][] board;
 
+    /*
+    This creates the game board
+     */
     public Board(int height, int width){
         this.height = height;
         this.width = width;
@@ -55,14 +58,23 @@ public class Board implements Serializable {
 
     }
 
+    /*
+    returns the height of the game board
+     */
     public int getHeight(){
         return this.height;
     }
 
+    /*
+    returns the width of the game board
+     */
     public int getWidth(){
         return this.width;
     }
 
+    /*
+    this finds ands returns the cell at a row and column
+     */
     public Cell getCell(int row, int column) throws OutOfBoundsException{
         if(!(row > this.getHeight() || row < this.getHeight() || column > this.getWidth() || column < this.getWidth())){
             return board[row][column];
@@ -74,14 +86,19 @@ public class Board implements Serializable {
 
     }
 
-    /*
 
+/*
     public String toString(){
 
+
     }
+*/
 
-    */
 
+
+    /*
+    Displays the board in character form to the user
+     */
     public void display(PrintStream out){
         StringBuilder t = new StringBuilder();
         for(int i = 0; i <= width; i++){
@@ -98,6 +115,10 @@ public class Board implements Serializable {
         }
 
     }
+
+    /*
+    Displays the board with the unsunk parts of ship
+     */
 
     public void fullDisplay(PrintStream out){
         StringBuilder t = new StringBuilder();
@@ -116,11 +137,19 @@ public class Board implements Serializable {
 
     }
 
+    /*
+    Adds ship to the game board
+     */
     public void addShip(Ship ship){
+        if(ship.isSunk() == true){
+
+        }
 
 
     }
-
+    /*
+    returns the state of the game True == game over
+     */
     public boolean allSunk(){
 
     }
