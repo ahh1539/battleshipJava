@@ -2,8 +2,7 @@ package battleship;
 
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
 
 /**
  * The class to represent the grid of cells (squares).
