@@ -37,10 +37,11 @@ public class Board implements Serializable {
      * Add a ship to the board. The only current reason that the
      * board needs direct access to the ships is to poll them
      * to see if they are all sunk and the game is over.
-     * @see Cell#putShip(Ship)
+     *
      * @param ship the as-yet un-added ship
      * @rit.pre This ship has already informed the Cells of the board
-     *    that are involved.
+     * that are involved.
+     * @see Cell#putShip(Ship)
      */
     // TODO addShip GOES HERE
 
@@ -52,44 +53,40 @@ public class Board implements Serializable {
     /*
     This creates the game board
      */
-    public Board(int height, int width){
+    public Board(int height, int width) {
         this.height = height;
         this.width = width;
         board = new Cell[height][width];
-        for(int i = 0 ; i < height; i++){
-            for(int j = 0; j < width; j++){
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 board[i][j] = new Cell(i, j);
             }
         }
-
     }
 
     /*
     returns the height of the game board
      */
-    public int getHeight(){
+    public int getHeight() {
         return this.height;
     }
 
     /*
     returns the width of the game board
      */
-    public int getWidth(){
+    public int getWidth() {
         return this.width;
     }
 
     /*
     this finds ands returns the cell at a row and column
      */
-    public Cell getCell(int row, int column) throws OutOfBoundsException{
-        if(!(row > this.getHeight() || row < this.getHeight() || column > this.getWidth() || column < this.getWidth())){
+    public Cell getCell(int row, int column) throws OutOfBoundsException {
+        if (!(row > this.getHeight() || row < this.getHeight() || column > this.getWidth() || column < this.getWidth())) {
             return board[row][column];
+        } else {
+            throw new OutOfBoundsException(row, column);
         }
-        else {
-            throw  new OutOfBoundsException(row,column);
-        }
-
-
     }
 
 
@@ -100,72 +97,71 @@ public class Board implements Serializable {
     }
 */
 
-
-
     /*
     Displays the board in character form to the user
      */
-    public void display(PrintStream out){
+    public void display(PrintStream out) {
         StringBuilder t = new StringBuilder();
-        for(int i = 0; i <= width; i++){
+        for (int i = 0; i <= width; i++) {
             t.append(" ");
             t.append(t);
         }
-        for (int row = 0; row < height; row++){
+        for (int row = 0; row < height; row++) {
             t.append(row);
             t.append(" ");
-            for(int column = 0; column < width; column++){
-                t.append("\n");
+            for (int column = 0; column < width; column++) {
+                t.append(" ");
                 t.append(board[row][column].displayHitStatus());
             }
+            t.append("\n");
         }
-
+        out.println(t.toString());
     }
 
     /*
     Displays the board with the unsunk parts of ship
      */
 
-    public void fullDisplay(PrintStream out){
+    public void fullDisplay(PrintStream out) {
         StringBuilder t = new StringBuilder();
-        for(int i = 0; i <= width; i++){
+        for (int i = 0; i <= width; i++) {
             t.append(" ");
             t.append(t);
         }
-        for (int row = 0; row < height; row++){
+        for (int row = 0; row < height; row++) {
             t.append(row);
             t.append(" ");
-            for(int column = 0; column < width; column++){
-                t.append("\n");
+            for (int column = 0; column < width; column++) {
+                t.append(" ");
                 t.append(board[row][column].displayChar());
             }
+            t.append("\n");
         }
-
+        out.println(t.toString());
     }
 
     /*
     Adds ship to the game board
      */
-    public void addShip(Ship ship){
+    public void addShip(Ship ship) {
         ships.add(ship);
 
     }
+
     /*
     returns the state of the game True == game over
      */
-    public boolean allSunk(){
-        for(int i = 0; i <= ships.size(); i++){
-            if(ships.get(i).isSunk() == true && i == ships.size()){
+    public boolean allSunk() {
+        for (int i = 0; i <= ships.size(); i++) {
+            if (ships.get(i).isSunk() == true && i == ships.size()) {
                 return true;
-            }
-            else if(ships.get(i).isSunk() == true){
+            } else if (ships.get(i).isSunk() == true) {
                 continue;
             }
 
         }
         return false;
     }
-
 
 
 }

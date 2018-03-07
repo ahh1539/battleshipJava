@@ -17,13 +17,19 @@ public class Cell implements Serializable {
     private Ship ship;
     private Boolean hit = false;
 
-    /** Character to display for a ship that has been entirely sunk */
+    /**
+     * Character to display for a ship that has been entirely sunk
+     */
     public static final char SUNK_SHIP_SECTION = '*';
 
-    /** Character to display for a ship that has been hit but not sunk */
+    /**
+     * Character to display for a ship that has been hit but not sunk
+     */
     public static final char HIT_SHIP_SECTION = '☐';
 
-    /** Character to display for a water cell that has been hit */
+    /**
+     * Character to display for a water cell that has been hit
+     */
     public static final char HIT_WATER = '.';
 
     /**
@@ -43,7 +49,7 @@ public class Cell implements Serializable {
     private int column;
 
 
-    public Cell(int row, int column){
+    public Cell(int row, int column) {
         this.row = row;
         this.column = column;
 
@@ -53,6 +59,7 @@ public class Cell implements Serializable {
      * Place a ship on this cell. Of course, ships typically cover
      * more than one Cell, so the same ship will usually be passed
      * to more than one Cell's putShip method.
+     *
      * @param ship the ship that is to be on this Cell
      * @throws OverlapException if there is already a ship here.
      */
@@ -61,11 +68,10 @@ public class Cell implements Serializable {
     /*
     Puts ship into a cell
      */
-    public void putShip(Ship ship) throws OverlapException{
-        if(this.ship == null){
+    public void putShip(Ship ship) throws OverlapException {
+        if (this.ship == null) {
             this.ship = ship;
-        }
-        else
+        } else
             throw new OverlapException(this.row, this.column);
 
     }
@@ -73,11 +79,10 @@ public class Cell implements Serializable {
     /*
     sets status of a ship cell as hit or not hit
      */
-    public void hit() throws CellPlayedException{
-        if(hit = true){
+    public void hit() throws CellPlayedException {
+        if (hit = true) {
             throw new CellPlayedException(this.row, this.column);
-        }
-        else {
+        } else {
             hit = true;
         }
 
@@ -86,39 +91,37 @@ public class Cell implements Serializable {
     /*
     Return a character representing the state of this Cell but without revealing unhit portions of ships
      */
-    public char displayHitStatus(){
-        if(ship.isSunk()){
+    public char displayHitStatus() {
+        if (ship.isSunk()) {
             return SUNK_SHIP_SECTION;
         }
-        if(!(ship.isSunk())){
+        if (!(ship.isSunk())) {
             return HIT_SHIP_SECTION;
         }
-        if(this.ship == null){
+        if (this.ship == null) {
             return HIT_WATER;
-        }
-        else {
+        } else {
             return PRISTINE_WATER;
         }
 
     }
 
-     /*
-     Return a character representing the state of this Cell
-      */
-    public char displayChar(){
-        if(ship.isSunk()){
+    /*
+    Return a character representing the state of this Cell
+     */
+    public char displayChar() {
+        if (ship.isSunk()) {
             return SUNK_SHIP_SECTION;
         }
-        if(!(ship.isSunk())){
+        if (!(ship.isSunk())) {
             return HIT_SHIP_SECTION;
         }
-        if(this.ship == null){
+        if (this.ship == null) {
             return HIT_WATER;
         }
-        if(this.ship == null && hit == false){
+        if (this.ship == null && hit == false) {
             return PRISTINE_WATER;
-        }
-        else{
+        } else {
             return HIDDEN_SHIP_SECTION;
         }
 
