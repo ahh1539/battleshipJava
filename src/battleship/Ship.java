@@ -1,7 +1,10 @@
 package battleship;
 
 import java.io.Serializable;
-
+/*
+Name: Alexander Hurley
+Date: 3/6/2018
+ */
 /**
  * A single ship in a Battleship game
  */

@@ -2,7 +2,10 @@ package battleship;
 
 import java.io.*;
 import java.util.ArrayList;
-
+/*
+Name: Alexander Hurley
+Date: 3/6/2018
+ */
 public class Battleship {
 
     public static final String ALL_SHIPS_SUNK = "All ships sunk!";
@@ -26,6 +29,9 @@ public class Battleship {
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
 
+    /*
+    constructor that starts the play of the game and reads the file, checks if resuming game or starting one
+     */
 
     public Battleship(String[] args) throws OverlapException, OutOfBoundsException {
         try{
@@ -42,11 +48,17 @@ public class Battleship {
         }
     }
 
+    /*
+    main method that controls the entire game
+     */
 
     public static void main(String[] args){
 
     }
 
+    /*
+    this save the current state of a game that has been stopped so it can be resumed later
+     */
     private boolean save(String[]args){
         try {
             OutputStream out = new FileOutputStream(args[0]);
@@ -66,7 +78,7 @@ public class Battleship {
     }
 
     /*
-    this is a helper function that sets up the arraylist of
+    this is a helper function that sets up the arraylist of ships and game board dimensions
      */
     private void setUp(String[]args) throws OverlapException, OutOfBoundsException {
         try {
@@ -118,6 +130,9 @@ public class Battleship {
         return false;
     }
 
+    /*
+    starts the game
+     */
     private void play(){
 
     }

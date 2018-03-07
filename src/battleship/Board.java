@@ -4,6 +4,10 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/*
+Name: Alexander Hurley
+Date: 3/6/2018
+ */
 
 /**
  * The class to represent the grid of cells (squares).

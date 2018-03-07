@@ -7,6 +7,11 @@ import java.io.Serializable;
  * A cell knows if there is a ship on it, and it remember
  * if it has been hit.
  */
+
+/*
+Name: Alexander Hurley
+Date: 3/6/2018
+ */
 public class Cell implements Serializable {
 
     private Ship ship;
