@@ -1,5 +1,8 @@
 package battleship;
 
+/*
+this expection is called when the space has already been hit
+ */
 public class CellPlayedException extends BattleshipException {
 
     public static final String ALREADY_HIT = "This cell has already been hit";
