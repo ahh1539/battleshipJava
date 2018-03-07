@@ -82,7 +82,7 @@ public class Board implements Serializable {
     this finds ands returns the cell at a row and column
      */
     public Cell getCell(int row, int column) throws OutOfBoundsException {
-        if (!(row > this.getHeight() || row < this.getHeight() || column > this.getWidth() || column < this.getWidth())) {
+        if (!(row >= this.getHeight() || row < 0 || column >= this.getWidth() || column < 0)) {
             return board[row][column];
         } else {
             throw new OutOfBoundsException(row, column);
@@ -102,10 +102,11 @@ public class Board implements Serializable {
      */
     public void display(PrintStream out) {
         StringBuilder t = new StringBuilder();
-        for (int i = 0; i <= width; i++) {
+        for (int i = 0; i < width; i++) {
             t.append(" ");
-            t.append(t);
+            t.append(i);
         }
+        t.append("\n");
         for (int row = 0; row < height; row++) {
             t.append(row);
             t.append(" ");
@@ -124,10 +125,11 @@ public class Board implements Serializable {
 
     public void fullDisplay(PrintStream out) {
         StringBuilder t = new StringBuilder();
-        for (int i = 0; i <= width; i++) {
+        for (int i = 0; i < width; i++) {
             t.append(" ");
-            t.append(t);
+            t.append(i);
         }
+        t.append("\n");
         for (int row = 0; row < height; row++) {
             t.append(row);
             t.append(" ");
@@ -152,7 +154,7 @@ public class Board implements Serializable {
     returns the state of the game True == game over
      */
     public boolean allSunk() {
-        for (int i = 0; i <= ships.size(); i++) {
+        for (int i = 0; i < ships.size(); i++) {
             if (ships.get(i).isSunk() == true && i == ships.size()) {
                 return true;
             } else if (ships.get(i).isSunk() == true) {

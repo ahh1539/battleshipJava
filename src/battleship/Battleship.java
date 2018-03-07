@@ -8,7 +8,7 @@ import java.util.Scanner;
 Name: Alexander Hurley
 Date: 3/6/2018
  */
-public class Battleship {
+public class Battleship implements Serializable{
 
     public static final String ALL_SHIPS_SUNK = "All ships sunk!";
 
@@ -40,6 +40,7 @@ public class Battleship {
             FileInputStream read = new FileInputStream(args[0]);
             ObjectInputStream obj = new ObjectInputStream(read);
             Battleship battle = (Battleship) obj.readObject();
+            this.board = (Board) obj.readObject();
             battle.play();
         } catch (FileNotFoundException thing) {
             System.out.println(MISSING_SETUP_FILE);
@@ -70,14 +71,16 @@ public class Battleship {
             OutputStream out = new FileOutputStream(args[1]);
             ObjectOutputStream oon = new ObjectOutputStream(out);
             oon.writeObject(this);
+            oon.writeObject(board);
             return true;
         } catch (FileNotFoundException thing) {
             System.out.println(MISSING_SETUP_FILE);
             return false;
         } catch (IOException thingy) {
-            System.out.println("arigato gozaimas sempai!!!");
+            System.out.println("IOException");
             return false;
         }
+
 
     }
 
@@ -90,18 +93,25 @@ public class Battleship {
             BufferedReader read = new BufferedReader(file);
             String line;
             int count = 0;
+
+            System.out.println("To attempt to hit a ship type h then two coordinates within the game board \n " +
+                    "example (h 2 2). To quit game at any time enter q. To cheat and show \n all the hidden ships type !." +
+                    "A box represents a hit ship. A period represents \n you hit empty water. To save a file to continue game " +
+                    "later type s then filename.bin ");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
             while (!((line = read.readLine()) == null)) {
                 String[] ary = line.split(" ");
                 if (count == 0) {
                     board = new Board(Integer.parseInt(ary[0]), Integer.parseInt(ary[1]));
-                    count++;
                 } else {
-                    if (ary[2] == "HORIZONTAL") {
+                    if (ary[2].equals("HORIZONTAL")) {
                         ships.add(new Ship(board, Integer.parseInt(ary[0]), Integer.parseInt(ary[1]), Ship.Orientation.HORIZONTAL, Integer.parseInt(ary[3])));
                     } else {
                         ships.add(new Ship(board, Integer.parseInt(ary[0]), Integer.parseInt(ary[1]), Ship.Orientation.VERTICAL, Integer.parseInt(ary[3])));
                     }
                 }
+                count++;
             }
         } catch (IOException bad) {
             System.out.println("The file is invalid");
@@ -116,8 +126,11 @@ public class Battleship {
             Cell cell = board.getCell(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
             cell.hit();
             board.display(System.out);
-        } catch (BattleshipException thing) {
+        } catch (OutOfBoundsException ex) {
             System.out.println(OutOfBoundsException.PAST_EDGE);
+        }
+        catch (CellPlayedException e) {
+
         }
     }
 
@@ -137,19 +150,21 @@ public class Battleship {
     private void play() {
         while(true){
             Scanner thing = new Scanner(System.in);
+            System.out.print("Type here:");
             String[] usr = thing.nextLine().split(" ");
-            if(usr[0] == "h" ){
+            if(usr[0].equals("h")){
                 hit(usr);
             }
-            else if(usr[0] == "s"){
+            else if(usr[0].equals("s")){
                 save(usr);
             }
-            else if(usr[0] == "q"){
+            else if(usr[0].equals("q")){
                 if(quit() == true) {
                     System.out.println(ALL_SHIPS_SUNK);
                 }
+                System.exit(0);
             }
-            else if(usr[0] == "!"){
+            else if(usr[0].equals("!")){
                 cheat();
             }
         }

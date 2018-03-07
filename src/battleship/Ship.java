@@ -79,17 +79,18 @@ public class Ship implements Serializable {
         this.lCol = lCol;
         this.length = length;
         this.ort = ort;
-        if (!(uRow > board.getHeight() || uRow < board.getHeight() || lCol > board.getWidth() || lCol < board.getWidth())) {
+        if (!(uRow >= board.getHeight() || uRow < 0 || lCol >= board.getWidth() || lCol < 0)) {
+            board.addShip(this);
             if (ort == Orientation.HORIZONTAL) {
                 int i = 0;
-                while (i <= length) {
+                while (i < length) {
                     board.getCell(uRow, lCol + i).putShip(this);
                     i++;
                 }
             }
             if (ort == Orientation.VERTICAL) {
                 int i = 0;
-                while (i <= length) {
+                while (i < length) {
                     board.getCell(uRow + i, lCol).putShip(this);
                     i++;
                 }

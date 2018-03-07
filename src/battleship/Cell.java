@@ -80,10 +80,14 @@ public class Cell implements Serializable {
     sets status of a ship cell as hit or not hit
      */
     public void hit() throws CellPlayedException {
-        if (hit = true) {
+        if (hit == true) {
+            System.out.println(CellPlayedException.ALREADY_HIT);
             throw new CellPlayedException(this.row, this.column);
         } else {
             hit = true;
+            if(ship != null) {
+                ship.hit();
+            }
         }
 
     }
@@ -92,13 +96,16 @@ public class Cell implements Serializable {
     Return a character representing the state of this Cell but without revealing unhit portions of ships
      */
     public char displayHitStatus() {
-        if (ship.isSunk()) {
-            return SUNK_SHIP_SECTION;
+        if(ship != null) {
+            if (ship.isSunk()) {
+                return SUNK_SHIP_SECTION;
+            }
+            if (!(ship.isSunk()) && hit == true) {
+                return HIT_SHIP_SECTION;
+            }
         }
-        if (!(ship.isSunk())) {
-            return HIT_SHIP_SECTION;
-        }
-        if (this.ship == null) {
+
+        if (this.ship == null && hit) {
             return HIT_WATER;
         } else {
             return PRISTINE_WATER;
@@ -110,20 +117,22 @@ public class Cell implements Serializable {
     Return a character representing the state of this Cell
      */
     public char displayChar() {
-        if (ship.isSunk()) {
-            return SUNK_SHIP_SECTION;
+        if(ship != null) {
+            if (ship.isSunk()) {
+                return SUNK_SHIP_SECTION;
+            }
+            if (hit == true) {
+                return HIT_SHIP_SECTION;
+            }
+            else if(hit == false) {
+                return HIDDEN_SHIP_SECTION;
+            }
         }
-        if (!(ship.isSunk())) {
-            return HIT_SHIP_SECTION;
-        }
-        if (this.ship == null) {
+        else if (this.ship == null && hit == true) {
             return HIT_WATER;
         }
-        if (this.ship == null && hit == false) {
-            return PRISTINE_WATER;
-        } else {
-            return HIDDEN_SHIP_SECTION;
-        }
+        return PRISTINE_WATER;
+
 
     }
 
