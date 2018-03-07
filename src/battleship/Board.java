@@ -2,6 +2,7 @@ package battleship;
 
 import java.io.PrintStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 /**
@@ -42,6 +43,7 @@ public class Board implements Serializable {
     private int height;
     private int width;
     private Cell[][] board;
+    private ArrayList<Ship> ships = new ArrayList<>();
 
     /*
     This creates the game board
@@ -141,17 +143,23 @@ public class Board implements Serializable {
     Adds ship to the game board
      */
     public void addShip(Ship ship){
-        if(ship.isSunk() == true){
-
-        }
-
+        ships.add(ship);
 
     }
     /*
     returns the state of the game True == game over
      */
     public boolean allSunk(){
+        for(int i = 0; i <= ships.size(); i++){
+            if(ships.get(i).isSunk() == true && i == ships.size()){
+                return true;
+            }
+            else if(ships.get(i).isSunk() == true){
+                continue;
+            }
 
+        }
+        return false;
     }
 
 
