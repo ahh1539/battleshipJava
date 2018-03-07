@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /*
 Name: Alexander Hurley
-Date: 3/6/2018
+Date: 3/06/2018
  */
 public class Battleship implements Serializable{
 
